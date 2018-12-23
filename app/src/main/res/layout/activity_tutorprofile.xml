@@ -6,16 +6,28 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="128dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="128dp"
-        tools:srcCompat="@tools:sample/avatars" />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <EditText
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="128dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="128dp"
+            android:adjustViewBounds="true"
+            android:src="@drawable/avatar_icon"></ImageView>
+
+        <EditText
         android:id="@+id/editName"
         android:layout_width="368dp"
         android:layout_height="46dp"
@@ -75,15 +87,6 @@
         android:inputType="text|textShortMessage"
         android:textAlignment="viewStart" />
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
-
             <EditText
                 android:id="@+id/editIntro"
                 android:layout_width="368dp"
@@ -105,8 +108,14 @@
                 android:inputType="text"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false" />
-
+            <Button
+                android:id="@+id/buttonConfirm"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Confirm"
+                />
         </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

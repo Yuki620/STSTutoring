@@ -80,31 +80,35 @@ public class LoginActivity extends AppCompatActivity {
         buttonSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                mAuth.createUserWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d("Test", "createUserWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    Toast.makeText(LoginActivity.this, "Authentication successful.",
-                                            Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(LoginActivity.this, TutorProfileActivity.class));
+                if (!emailEditText.getText().toString().isEmpty() && !passwordEditText.getText().toString().isEmpty()) {
+                    mAuth.createUserWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
+                            .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                                @Override
+                                public void onComplete(@NonNull Task<AuthResult> task) {
+                                    if (task.isSuccessful()) {
+                                        // Sign in success, update UI with the signed-in user's information
+                                        Log.d("Test", "createUserWithEmail:success");
+                                        FirebaseUser user = mAuth.getCurrentUser();
+                                        Toast.makeText(LoginActivity.this, "Authentication successful.",
+                                                Toast.LENGTH_SHORT).show();
 
 
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w("Test", "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
+                                    } else {
+                                        // If sign in fails, display a message to the user.
+                                        Log.w("Test", "createUserWithEmail:failure", task.getException());
+                                        Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                                Toast.LENGTH_SHORT).show();
 
+                                    }
                                 }
-
                                 // ...
-                            }
-                        });
+
+                            });
+                }
+                startActivity(new Intent(LoginActivity.this, TutorProfileActivity.class));
+
             }
+
         });
         // Configure sign-in to request the user's ID, email address, and basic
 // profile. ID and basic profile are included in DEFAULT_SIGN_IN.
