@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.firebase.ui.auth.data.model.User;
 import com.google.android.gms.auth.api.Auth;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
@@ -62,7 +63,8 @@ public class LoginActivity extends AppCompatActivity {
                                     FirebaseUser user = mAuth.getCurrentUser();
                                     Toast.makeText(LoginActivity.this, "Login successful.",
                                             Toast.LENGTH_SHORT).show();
-                                    startActivity(new Intent(LoginActivity.this, FindProfileActivity.class));
+                                    UserManager.user = user;
+                                    startActivity(new Intent(LoginActivity.this, TutorProfileActivity.class));
 
                                 } else {
                                     // If sign in fails, display a message to the user.
@@ -91,7 +93,8 @@ public class LoginActivity extends AppCompatActivity {
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         Toast.makeText(LoginActivity.this, "Authentication successful.",
                                                 Toast.LENGTH_SHORT).show();
-
+                                        UserManager.user = user;
+                                        startActivity(new Intent(LoginActivity.this, TutorProfileActivity.class));
 
                                     } else {
                                         // If sign in fails, display a message to the user.
@@ -105,7 +108,6 @@ public class LoginActivity extends AppCompatActivity {
 
                             });
                 }
-                startActivity(new Intent(LoginActivity.this, TutorProfileActivity.class));
 
             }
 

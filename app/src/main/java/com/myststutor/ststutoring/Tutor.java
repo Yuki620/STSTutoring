@@ -75,5 +75,24 @@ public class Tutor {
     private String intro;
     private String contact;
 
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    public String getUid() {
+        return uid;
+    }
+
+    public void setUid(String uid) {
+        this.uid = uid;
+    }
+
+    private String email;
+    private String uid;
+
 
 }

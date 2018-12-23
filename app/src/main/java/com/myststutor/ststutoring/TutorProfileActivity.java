@@ -3,9 +3,16 @@ package com.myststutor.ststutoring;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class TutorProfileActivity extends AppCompatActivity {
 
@@ -32,14 +39,54 @@ public class TutorProfileActivity extends AppCompatActivity {
         introEditText = findViewById(R.id.editIntro);
         contactEditText = findViewById(R.id.editContact);
         confirmButton = findViewById(R.id.buttonConfirm);
+        loadUser();
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                
+                Tutor t = new Tutor();
+                t.setName(nameEditText.getText().toString());
+                t.setSchool(schoolEditText.getText().toString());
+                t.setGrade(Integer.parseInt(gradeEditText.getText().toString()));
+                t.setAgeRange(ageEditText.getText().toString());
+                t.setAvailability(availabilityEditText.getText().toString());
+                t.setLocation(locationEditText.getText().toString());
+                t.setIntro(introEditText.getText().toString());
+                t.setContact(contactEditText.getText().toString());
+                t.setEmail(UserManager.user.getEmail());
+                t.setUid(UserManager.user.getUid());
+
+                // Write a message to the database
+                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+                databaseReference.child("tutor").child(t.getUid()).setValue(t);
+
             }
         });
 
+    }
+    private void loadUser() {
+        DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference("tutor/"+ UserManager.user.getUid());
+        ValueEventListener postListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(DataSnapshot dataSnapshot) {
+                // Get Post object and use the values to update the UI
+                Tutor tutor = dataSnapshot.getValue(Tutor.class);
+                if (tutor != null) {
+                    nameEditText.setText(tutor.getName());
+                    schoolEditText.setText(tutor.getSchool());
+                }
 
+                // ...
+            }
+
+            @Override
+            public void onCancelled(DatabaseError databaseError) {
+                // Getting Post failed, log a message
+                Log.w("Test", "loadPost:onCancelled", databaseError.toException());
+                // ...
+            }
+        };
+        databaseReference.addValueEventListener(postListener);
     }
 }
