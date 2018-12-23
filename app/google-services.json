@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "460048166994",
+    "firebase_url": "https://stst-1d5a6.firebaseio.com",
+    "project_id": "stst-1d5a6",
+    "storage_bucket": "stst-1d5a6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:460048166994:android:bb5769fe537e740b",
+        "android_client_info": {
+          "package_name": "com.myststutor.ststutoring"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "460048166994-2g2jsvlm385iogg2hbb0fk8ebjsdlqqq.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.myststutor.ststutoring",
+            "certificate_hash": "cf1e9a121224420ed62e4e42ee4a513026ab2164"
+          }
+        },
+        {
+          "client_id": "460048166994-ek1n1otf064i83i6e11embjjboddipr3.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyC84u0ERFvHygAYWsxmlpZqI7sH3KfTSzk"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "460048166994-ek1n1otf064i83i6e11embjjboddipr3.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
