@@ -94,5 +94,19 @@ public class Tutor {
     private String email;
     private String uid;
 
-
+    @Override
+    public String toString() {
+        return "Tutor{" +
+                "name='" + name + '\'' +
+                ", school='" + school + '\'' +
+                ", grade=" + grade +
+                ", ageRange='" + ageRange + '\'' +
+                ", availability='" + availability + '\'' +
+                ", location='" + location + '\'' +
+                ", intro='" + intro + '\'' +
+                ", contact='" + contact + '\'' +
+                ", email='" + email + '\'' +
+                ", uid='" + uid + '\'' +
+                '}';
+    }
 }

@@ -75,7 +75,7 @@ public class TutorProfileActivity extends AppCompatActivity {
                 if (tutor != null) {
                     nameEditText.setText(tutor.getName());
                     schoolEditText.setText(tutor.getSchool());
-                    gradeEditText.setText(tutor.getGrade());
+                    gradeEditText.setText(tutor.getGrade()+"");
                     ageEditText.setText(tutor.getAgeRange());
                     availabilityEditText.setText(tutor.getAvailability());
                     locationEditText.setText(tutor.getLocation());
