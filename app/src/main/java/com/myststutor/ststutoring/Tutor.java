@@ -75,6 +75,16 @@ public class Tutor {
     private String intro;
     private String contact;
 
+    public float getPrice() {
+        return price;
+    }
+
+    public void setPrice(float price) {
+        this.price = price;
+    }
+
+    private float price;
+
     public String getEmail() {
         return email;
     }

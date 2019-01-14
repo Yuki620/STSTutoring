@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.SeekBar;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -30,6 +32,12 @@ public class FindActivity extends AppCompatActivity {
     Spinner subjectSpinner;
     String [] subjectArray = {"All", "English", "Math", "Biology", "Computer Science","History"};
 
+    TextView textViewCurPrice;
+    TextView textViewCurAge;
+    SeekBar seekBarPrice;
+    SeekBar seekBarAge;
+
+
 
 
     @Override
@@ -38,6 +46,35 @@ public class FindActivity extends AppCompatActivity {
         setContentView(R.layout.activity_find);
         tutorListView = findViewById(R.id.tutorListView);
         loadTutor();
+
+        textViewCurPrice = findViewById(R.id.textViewCurPrice);
+        textViewCurAge = findViewById(R.id.textViewCurAge);
+        seekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean fromUser) {
+                textViewCurPrice.setText("$" + i);
+                filteredTutors = new ArrayList<>();
+                for (Tutor tutor : allTutors) {
+                    if (tutor.getPrice()<=i) {
+                        filteredTutors.add(tutor);
+                    }
+                }
+                tutorListAdapter = new TutorListAdapter(FindActivity.this, R.layout.listview_item_tutor, filteredTutors);
+                tutorListView.setAdapter(tutorListAdapter);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+
+
         subjectSpinner = findViewById(R.id.subjectSpinner);
         subjectSpinner.setAdapter(new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, subjectArray));
         subjectSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

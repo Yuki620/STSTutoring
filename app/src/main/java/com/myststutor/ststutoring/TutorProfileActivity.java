@@ -1,5 +1,6 @@
 package com.myststutor.ststutoring;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
@@ -7,6 +8,8 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -25,6 +28,9 @@ public class TutorProfileActivity extends AppCompatActivity {
     EditText introEditText;
     EditText contactEditText;
     Button confirmButton;
+    TextView profileCurPrice;
+    SeekBar seekBarPrice;
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,7 +45,27 @@ public class TutorProfileActivity extends AppCompatActivity {
         introEditText = findViewById(R.id.editIntro);
         contactEditText = findViewById(R.id.editContact);
         confirmButton = findViewById(R.id.buttonConfirm);
+        profileCurPrice = findViewById(R.id.profileCurPrice);
+        seekBarPrice = findViewById(R.id.seekBarPrice);
         loadUser();
+
+        seekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean fromUser) {
+                profileCurPrice.setText("$" + i);
+
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -55,11 +81,13 @@ public class TutorProfileActivity extends AppCompatActivity {
                 t.setContact(contactEditText.getText().toString());
                 t.setEmail(UserManager.user.getEmail());
                 t.setUid(UserManager.user.getUid());
+                t.setPrice(seekBarPrice.getProgress());
 
                 // Write a message to the database
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
                 databaseReference.child("tutor").child(t.getUid()).setValue(t);
+                startActivity(new Intent(TutorProfileActivity.this, FindProfileActivity.class));
 
             }
         });
@@ -81,6 +109,8 @@ public class TutorProfileActivity extends AppCompatActivity {
                     locationEditText.setText(tutor.getLocation());
                     introEditText.setText(tutor.getIntro());
                     contactEditText.setText(tutor.getContact());
+                    seekBarPrice.setProgress((int)(tutor.getPrice()));
+                    profileCurPrice.setText("$"+ tutor.getPrice());
 
                 }
 
