@@ -50,8 +50,14 @@ public class FindActivity extends AppCompatActivity {
 
     TextView textViewCurPrice;
     TextView textViewCurAge;
+    TextView textViewCurDistance;
     SeekBar seekBarPrice;
     SeekBar seekBarAge;
+    SeekBar seekBarDistance;
+
+    double latitutde;
+    double longitude;
+
 
 
     LocationManager locationManager;
@@ -67,11 +73,14 @@ public class FindActivity extends AppCompatActivity {
 
 
         locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-        LocationListener locationListener = new LocationListener() {
+        final LocationListener locationListener = new LocationListener() {
             public void onLocationChanged(Location location) {
                 // Called when a new location is found by the network location provider.
                 Log.i("TEST", "Updating the location: " + location.getLatitude() + ", " + location.getLongitude());
+                latitutde = location.getLatitude();
+                longitude = location.getLongitude();
             }
+
 
             public void onStatusChanged(String provider, int status, Bundle extras) {
             }
@@ -98,7 +107,7 @@ public class FindActivity extends AppCompatActivity {
                     public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
                 }).check();
 
-        locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
+        //locationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER, 0, 0, locationListener);
 
 
         tutorListView = findViewById(R.id.tutorListView);
@@ -106,8 +115,36 @@ public class FindActivity extends AppCompatActivity {
 
         textViewCurPrice = findViewById(R.id.textViewCurPrice);
         textViewCurAge = findViewById(R.id.textViewCurAge);
+        textViewCurDistance = findViewById(R.id.textVIewCurDistance);
         seekBarPrice = findViewById(R.id.seekBarPrice);
         seekBarAge = findViewById(R.id.seekBarAge);
+        seekBarDistance = findViewById(R.id.seekBarDistance);
+        seekBarDistance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean fromUser) {
+                textViewCurDistance.setText(i+"");
+                filteredTutors = new ArrayList<>();
+                for (Tutor tutor : allTutors) {
+                    double distance = GeoHelper.getDistance(longitude, latitutde, tutor.getLon(), tutor.getLat());
+                    Log.i("Test", "distance: "+ distance);
+                    if (distance<=i) {
+                        filteredTutors.add(tutor);
+                    }
+                }
+                tutorListAdapter = new TutorListAdapter(FindActivity.this, R.layout.listview_item_tutor, filteredTutors);
+                tutorListView.setAdapter(tutorListAdapter);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
         seekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean fromUser) {

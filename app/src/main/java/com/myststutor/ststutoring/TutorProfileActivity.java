@@ -79,6 +79,7 @@ public class TutorProfileActivity extends AppCompatActivity {
 
             }
         });
+
         tutorProfileTarget.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
             @Override
             public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Integer minValue, Integer maxValue) {
@@ -138,6 +139,7 @@ public class TutorProfileActivity extends AppCompatActivity {
                     contactEditText.setText(tutor.getContact());
                     seekBarPrice.setProgress((int)(tutor.getPrice()));
                     profileCurPrice.setText("$"+ tutor.getPrice());
+
 
                 }
 

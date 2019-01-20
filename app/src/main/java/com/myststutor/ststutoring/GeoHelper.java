@@ -43,7 +43,7 @@ public class GeoHelper {
         locationB.setLatitude(lat2);
         locationB.setLongitude(lon2);
 
-        float distance = locationA.distanceTo(locationB);
+        float distance = locationA.distanceTo(locationB)* 0.0006f;
         return distance;
     }
 

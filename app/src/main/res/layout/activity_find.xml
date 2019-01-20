@@ -107,19 +107,21 @@
                     android:layout_alignParentLeft="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Min"/>
+                    android:text="0mi"/>
                 <TextView
+                    android:id="@+id/textVIewCurDistance"
                     android:layout_centerInParent="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Current"/>
+                    android:text=""/>
                 <TextView
                     android:layout_alignParentRight="true"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="Max"/>
+                    android:text="100mi"/>
             </RelativeLayout>
             <SeekBar
+                android:id="@+id/seekBarDistance"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
         </LinearLayout>

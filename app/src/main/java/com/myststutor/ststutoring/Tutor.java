@@ -15,6 +15,16 @@ public class Tutor {
     private String email;
     private String uid;
 
+    public float getDistance() {
+        return distance;
+    }
+
+    public void setDistance(float distance) {
+        this.distance = distance;
+    }
+
+    private float distance;
+
     public double getLon() {
         return lon;
     }
