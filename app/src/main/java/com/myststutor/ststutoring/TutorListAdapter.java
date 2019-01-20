@@ -32,7 +32,7 @@ public class TutorListAdapter extends ArrayAdapter<Tutor> {
         TextView nameTextView = view.findViewById(R.id.nameItemTextView);
         nameTextView.setText(t.getName());
         TextView priceTextView = view.findViewById(R.id.priceItemTextView);
-        priceTextView.setText(t.getAgeRange());
+        priceTextView.setText("$"+t.getPrice());
         TextView subjectTextView = view.findViewById(R.id.subjectItemTextView);
         subjectTextView.setText(t.getSchool());
 

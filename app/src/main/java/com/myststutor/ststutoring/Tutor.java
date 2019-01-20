@@ -2,6 +2,19 @@ package com.myststutor.ststutoring;
 
 public class Tutor {
 
+    private String name;
+    private String school;
+    private int grade;
+    private int ageRangeMin;
+    private int ageRangeMax;
+    private String availability;
+    private String location;
+    private String intro;
+    private String contact;
+    private float price;
+    private String email;
+    private String uid;
+
     public String getName() {
         return name;
     }
@@ -26,12 +39,20 @@ public class Tutor {
         this.grade = grade;
     }
 
-    public String getAgeRange() {
-        return ageRange;
+    public int getAgeRangeMin() {
+        return ageRangeMin;
     }
 
-    public void setAgeRange(String ageRange) {
-        this.ageRange = ageRange;
+    public void setAgeRangeMin(int ageRangeMin) {
+        this.ageRangeMin = ageRangeMin;
+    }
+
+    public int getAgeRangeMax() {
+        return ageRangeMax;
+    }
+
+    public void setAgeRangeMax(int ageRangeMax) {
+        this.ageRangeMax = ageRangeMax;
     }
 
     public String getAvailability() {
@@ -66,15 +87,6 @@ public class Tutor {
         this.contact = contact;
     }
 
-    private String name;
-    private String school;
-    private int grade;
-    private String ageRange;
-    private String availability;
-    private String location;
-    private String intro;
-    private String contact;
-
     public float getPrice() {
         return price;
     }
@@ -82,8 +94,6 @@ public class Tutor {
     public void setPrice(float price) {
         this.price = price;
     }
-
-    private float price;
 
     public String getEmail() {
         return email;
@@ -101,20 +111,19 @@ public class Tutor {
         this.uid = uid;
     }
 
-    private String email;
-    private String uid;
-
     @Override
     public String toString() {
         return "Tutor{" +
                 "name='" + name + '\'' +
                 ", school='" + school + '\'' +
                 ", grade=" + grade +
-                ", ageRange='" + ageRange + '\'' +
+                ", ageRangeMin=" + ageRangeMin +
+                ", ageRangeMax=" + ageRangeMax +
                 ", availability='" + availability + '\'' +
                 ", location='" + location + '\'' +
                 ", intro='" + intro + '\'' +
                 ", contact='" + contact + '\'' +
+                ", price=" + price +
                 ", email='" + email + '\'' +
                 ", uid='" + uid + '\'' +
                 '}';

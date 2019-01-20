@@ -49,6 +49,8 @@ public class FindActivity extends AppCompatActivity {
 
         textViewCurPrice = findViewById(R.id.textViewCurPrice);
         textViewCurAge = findViewById(R.id.textViewCurAge);
+        seekBarPrice = findViewById(R.id.seekBarPrice);
+        seekBarAge = findViewById(R.id.seekBarAge);
         seekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean fromUser) {
@@ -56,6 +58,30 @@ public class FindActivity extends AppCompatActivity {
                 filteredTutors = new ArrayList<>();
                 for (Tutor tutor : allTutors) {
                     if (tutor.getPrice()<=i) {
+                        filteredTutors.add(tutor);
+                    }
+                }
+                tutorListAdapter = new TutorListAdapter(FindActivity.this, R.layout.listview_item_tutor, filteredTutors);
+                tutorListView.setAdapter(tutorListAdapter);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {
+
+            }
+
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {
+
+            }
+        });
+        seekBarAge.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean fromUser) {
+                textViewCurAge.setText(i+"");
+                filteredTutors = new ArrayList<>();
+                for (Tutor tutor : allTutors) {
+                    if (tutor.getAgeRangeMin()<=i&&tutor.getAgeRangeMax()>=i) {
                         filteredTutors.add(tutor);
                     }
                 }

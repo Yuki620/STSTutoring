@@ -13,6 +13,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.florescu.android.rangeseekbar.RangeSeekBar;
 import org.w3c.dom.Text;
 
 public class FindProfileActivity extends AppCompatActivity {
@@ -25,6 +26,8 @@ public class FindProfileActivity extends AppCompatActivity {
     TextView locationTextView;
     TextView introTextView;
     TextView contactTextView;
+    TextView findProfilePrice;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -39,6 +42,8 @@ public class FindProfileActivity extends AppCompatActivity {
         locationTextView = findViewById(R.id.locationFindTextView);
         introTextView = findViewById(R.id.introFindTextView);
         contactTextView = findViewById(R.id.contactFindTextView);
+        findProfilePrice = findViewById(R.id.findProfilePrice);
+
 
 
         loadUser();
@@ -57,11 +62,12 @@ public class FindProfileActivity extends AppCompatActivity {
                     nameTextView.setText(tutor.getName());
                     schoolTextView.setText(tutor.getSchool());
                     gradeTextView.setText(tutor.getGrade()+"");
-                    ageTextView.setText(tutor.getAgeRange());
+                    ageTextView.setText(tutor.getAgeRangeMin()+" - " +tutor.getAgeRangeMax());
                     availabilityTextView.setText(tutor.getAvailability());
                     locationTextView.setText(tutor.getLocation());
                     introTextView.setText(tutor.getIntro());
                     contactTextView.setText(tutor.getContact());
+                    findProfilePrice.setText("$"+ tutor.getPrice()+" per hour");
 
                 }
 

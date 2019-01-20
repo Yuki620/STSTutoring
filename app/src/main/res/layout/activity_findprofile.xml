@@ -53,6 +53,15 @@
                 android:hint="Grade"
                 android:inputType="number"
                 android:textAlignment="viewStart" />
+            <TextView
+                android:id="@+id/findProfilePrice"
+                android:layout_width="368dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:ems="10"
+                android:hint="Price"
+                android:inputType="number"
+                android:textAlignment="viewStart" />/>
 
             <TextView
                 android:id="@+id/targetFindTextView"
@@ -105,6 +114,7 @@
                 android:inputType="text"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false" />
+
 
         </LinearLayout>
 

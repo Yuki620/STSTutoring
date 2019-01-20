@@ -2,6 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:rsb="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -76,7 +77,8 @@
                         android:id="@+id/profileCurPrice"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_alignParentStart="true"
+                        android:layout_centerInParent="true"
+                        android:layout_centerHorizontal="true"
                         android:layout_alignParentTop="true" />
 
                     <TextView
@@ -88,7 +90,7 @@
                 <SeekBar
                     android:id="@+id/seekBarPrice"
                     android:max="1000"
-                    android:layout_width="wrap_content"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
             </LinearLayout>
 
@@ -102,8 +104,43 @@
         android:hint="Target Age Range"
         android:inputType="text|number"
         android:textAlignment="viewStart" />
+        <LinearLayout
+            android:layout_margin="5dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
 
-    <EditText
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+                <TextView
+                    android:id="@+id/profileMaxAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_alignParentTop="true"
+                    android:text="100"/>
+                <TextView
+                    android:id="@+id/profileMinAge"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentLeft="true"
+                    android:layout_alignParentTop="true"
+                    android:text="0"/>
+            </RelativeLayout>
+
+
+                <org.florescu.android.rangeseekbar.RangeSeekBar
+                android:id="@+id/tutorProfileTarget"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                rsb:absoluteMinValue="100"
+                rsb:absoluteMaxValue="0"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp" />
+        </LinearLayout>
+
+            <EditText
         android:id="@+id/editAvailability"
         android:layout_width="368dp"
         android:layout_height="wrap_content"

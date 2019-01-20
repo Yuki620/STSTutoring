@@ -17,6 +17,9 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import org.florescu.android.rangeseekbar.RangeSeekBar;
+
+
 public class TutorProfileActivity extends AppCompatActivity {
 
     EditText nameEditText;
@@ -30,6 +33,11 @@ public class TutorProfileActivity extends AppCompatActivity {
     Button confirmButton;
     TextView profileCurPrice;
     SeekBar seekBarPrice;
+    RangeSeekBar<Integer> tutorProfileTarget;
+    TextView profileMinAge;
+    TextView profileMaxAge;
+
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -47,6 +55,10 @@ public class TutorProfileActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.buttonConfirm);
         profileCurPrice = findViewById(R.id.profileCurPrice);
         seekBarPrice = findViewById(R.id.seekBarPrice);
+        tutorProfileTarget = findViewById(R.id.tutorProfileTarget);
+        profileMinAge = findViewById(R.id.profileMinAge);
+        profileMaxAge = findViewById(R.id.profileMaxAge);
+
         loadUser();
 
         seekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -66,6 +78,13 @@ public class TutorProfileActivity extends AppCompatActivity {
 
             }
         });
+        tutorProfileTarget.setOnRangeSeekBarChangeListener(new RangeSeekBar.OnRangeSeekBarChangeListener<Integer>() {
+            @Override
+            public void onRangeSeekBarValuesChanged(RangeSeekBar<?> bar, Integer minValue, Integer maxValue) {
+                profileMinAge.setText(""+ minValue);
+                profileMaxAge.setText(""+ maxValue);
+            }
+        });
 
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -74,7 +93,8 @@ public class TutorProfileActivity extends AppCompatActivity {
                 t.setName(nameEditText.getText().toString());
                 t.setSchool(schoolEditText.getText().toString());
                 t.setGrade(Integer.parseInt(gradeEditText.getText().toString()));
-                t.setAgeRange(ageEditText.getText().toString());
+                t.setAgeRangeMin(Integer.parseInt(profileMinAge.getText().toString()));
+                t.setAgeRangeMax(Integer.parseInt(profileMaxAge.getText().toString()));
                 t.setAvailability(availabilityEditText.getText().toString());
                 t.setLocation(locationEditText.getText().toString());
                 t.setIntro(introEditText.getText().toString());
@@ -87,7 +107,7 @@ public class TutorProfileActivity extends AppCompatActivity {
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
                 databaseReference.child("tutor").child(t.getUid()).setValue(t);
-                startActivity(new Intent(TutorProfileActivity.this, FindProfileActivity.class));
+                startActivity(new Intent(TutorProfileActivity.this, FindActivity.class));
 
             }
         });
@@ -104,7 +124,8 @@ public class TutorProfileActivity extends AppCompatActivity {
                     nameEditText.setText(tutor.getName());
                     schoolEditText.setText(tutor.getSchool());
                     gradeEditText.setText(tutor.getGrade()+"");
-                    ageEditText.setText(tutor.getAgeRange());
+                    tutorProfileTarget.setSelectedMinValue(tutor.getAgeRangeMin());
+                    tutorProfileTarget.setSelectedMaxValue(tutor.getAgeRangeMax());
                     availabilityEditText.setText(tutor.getAvailability());
                     locationEditText.setText(tutor.getLocation());
                     introEditText.setText(tutor.getIntro());
