@@ -1,7 +1,9 @@
 package com.myststutor.ststutoring;
 
+import android.Manifest;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Environment;
@@ -28,6 +30,11 @@ import com.google.firebase.database.ValueEventListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.karumi.dexter.Dexter;
+import com.karumi.dexter.MultiplePermissionsReport;
+import com.karumi.dexter.PermissionToken;
+import com.karumi.dexter.listener.PermissionRequest;
+import com.karumi.dexter.listener.multi.MultiplePermissionsListener;
 import com.squareup.picasso.Picasso;
 
 import org.florescu.android.rangeseekbar.RangeSeekBar;
@@ -38,7 +45,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
+import java.util.List;
 
 
 public class TutorProfileActivity extends AppCompatActivity {
@@ -212,32 +221,14 @@ public class TutorProfileActivity extends AppCompatActivity {
     public void onActivityResult(int requestCode, int resultCode, Intent data)
     {
         if (requestCode == PICK_IMAGE) {
-            final Bundle extras = data.getExtras();
-            if (extras != null) {
-                //Get image
-                Bitmap b = extras.getParcelable("data");
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                try {
-                    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Environment.DIRECTORY_DCIM + "/image.jpg";
-                    File file = new File(path);
-                    OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
-                    b.compress(Bitmap.CompressFormat.JPEG, 100, os);
-                    os.close();
-
-                    //b.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
-                    //String path = MediaStore.Images.Media.insertImage(getContentResolver(), b, "Image Description", null);
-                    Uri uri = Uri.parse("file:///" + path);
-                    Log.i("TEST", uri.toString() + " size: " + file.length());
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                byte[] imgdata = baos.toByteArray();
+            try {
+                Uri fileUri = data.getData();
+                Log.i("TEST", "FileURI: " + fileUri);
+                InputStream iStream = getContentResolver().openInputStream(fileUri);
+                byte[] imgdata = getBytes(iStream);
 
                 //mImageView.setImageBitmap(imageBitmap);
-                Log.i("TEST", "Successfully took the image! " + b.getByteCount());
+                Log.i("TEST", "Successfully get the image! " + imgdata.length);
 
                 // upload the image to Firebase Storage
                 FirebaseStorage storage = FirebaseStorage.getInstance("gs://stst-1d5a6.appspot.com/");
@@ -248,7 +239,7 @@ public class TutorProfileActivity extends AppCompatActivity {
                 final StorageReference imageRef = storageRef.child(
                         "profile-photos/" + System.currentTimeMillis() + ".jpg");
 
-                UploadTask uploadTask = imageRef.putBytes(imgdata );
+                UploadTask uploadTask = imageRef.putBytes(imgdata);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
@@ -272,8 +263,22 @@ public class TutorProfileActivity extends AppCompatActivity {
                         });
                     }
                 });
+            } catch (Exception e) {
+                Log.e("TEST", "Failed to catpture the image", e);
             }
         }
+    }
+
+    public byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
     }
 
 }
