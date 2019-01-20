@@ -3,6 +3,7 @@ package com.myststutor.ststutoring;
 import android.content.Context;
 import android.location.Address;
 import android.location.Geocoder;
+import android.location.Location;
 import android.util.Log;
 
 import java.io.IOException;
@@ -31,4 +32,20 @@ public class GeoHelper {
         return loc;
     }
 
+    public static float getDistance(double lon1, double lat1, double lon2, double lat2) {
+        Location locationA = new Location("point A");
+
+        locationA.setLatitude(lat1);
+        locationA.setLongitude(lon1);
+
+        Location locationB = new Location("point B");
+
+        locationB.setLatitude(lat2);
+        locationB.setLongitude(lon2);
+
+        float distance = locationA.distanceTo(locationB);
+        return distance;
+    }
+
+    
 }
