@@ -97,6 +97,17 @@ public class TutorProfileActivity extends AppCompatActivity {
             }
         });
 
+        profilePictureImageView = findViewById(R.id.profilePicImageView);
+        profilePictureImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+            }
+        });
+
         loadUser();
 
         seekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -129,6 +140,7 @@ public class TutorProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Tutor t = new Tutor();
+                t.setProfileImageUrl(currentProfileImageUrl);
                 t.setName(nameEditText.getText().toString());
                 t.setSchool(schoolEditText.getText().toString());
                 t.setGrade(Integer.parseInt(gradeEditText.getText().toString()));
@@ -176,6 +188,9 @@ public class TutorProfileActivity extends AppCompatActivity {
                     contactEditText.setText(tutor.getContact());
                     seekBarPrice.setProgress((int)(tutor.getPrice()));
                     profileCurPrice.setText("$"+ tutor.getPrice());
+                    if (currentProfileImageUrl != null) {
+                        Picasso.get().load(tutor.getProfileImageUrl()).into(profilePictureImageView);
+                    }
 
 
                 }
