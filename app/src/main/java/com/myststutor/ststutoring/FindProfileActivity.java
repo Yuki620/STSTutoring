@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.firebase.ui.auth.data.model.User;
@@ -12,6 +13,7 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+import com.squareup.picasso.Picasso;
 
 import org.florescu.android.rangeseekbar.RangeSeekBar;
 import org.w3c.dom.Text;
@@ -27,6 +29,7 @@ public class FindProfileActivity extends AppCompatActivity {
     TextView introTextView;
     TextView contactTextView;
     TextView findProfilePrice;
+    ImageView profileImageView;
 
 
     @Override
@@ -43,6 +46,7 @@ public class FindProfileActivity extends AppCompatActivity {
         introTextView = findViewById(R.id.introFindTextView);
         contactTextView = findViewById(R.id.contactFindTextView);
         findProfilePrice = findViewById(R.id.findProfilePrice);
+        profileImageView = findViewById(R.id.imageFindTextView);
 
 
 
@@ -68,6 +72,10 @@ public class FindProfileActivity extends AppCompatActivity {
                     introTextView.setText(tutor.getIntro());
                     contactTextView.setText(tutor.getContact());
                     findProfilePrice.setText("$"+ tutor.getPrice()+" per hour");
+                    if (tutor.getProfileImageUrl() != null) {
+                        Picasso.get().load(tutor.getProfileImageUrl()).into(profileImageView);
+
+                    }
 
                 }
 

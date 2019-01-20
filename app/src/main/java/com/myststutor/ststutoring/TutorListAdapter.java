@@ -6,7 +6,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -35,6 +38,11 @@ public class TutorListAdapter extends ArrayAdapter<Tutor> {
         priceTextView.setText("$"+t.getPrice());
         TextView subjectTextView = view.findViewById(R.id.subjectItemTextView);
         subjectTextView.setText(t.getSchool());
+        ImageView profileImageView = view.findViewById(R.id.profileImageView);
+        if (t.getProfileImageUrl() != null) {
+            Picasso.get().load(t.getProfileImageUrl()).into(profileImageView);
+
+        }
 
 
         return view;
