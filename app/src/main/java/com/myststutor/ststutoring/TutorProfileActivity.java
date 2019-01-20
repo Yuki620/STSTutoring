@@ -45,6 +45,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.List;
 
@@ -118,6 +119,17 @@ public class TutorProfileActivity extends AppCompatActivity {
                     public void onPermissionRationaleShouldBeShown(List<PermissionRequest> permissions, PermissionToken token) {/* ... */}
                 }).check();
 
+        profilePictureImageView = findViewById(R.id.profilePicImageView);
+        profilePictureImageView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent();
+                intent.setType("image/*");
+                intent.setAction(Intent.ACTION_GET_CONTENT);
+                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
+            }
+        });
+
         loadUser();
 
         seekBarPrice.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
@@ -150,6 +162,7 @@ public class TutorProfileActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Tutor t = new Tutor();
+                t.setProfileImageUrl(currentProfileImageUrl);
                 t.setName(nameEditText.getText().toString());
                 t.setSchool(schoolEditText.getText().toString());
                 t.setGrade(Integer.parseInt(gradeEditText.getText().toString()));
@@ -197,6 +210,9 @@ public class TutorProfileActivity extends AppCompatActivity {
                     contactEditText.setText(tutor.getContact());
                     seekBarPrice.setProgress((int)(tutor.getPrice()));
                     profileCurPrice.setText("$"+ tutor.getPrice());
+                    if (currentProfileImageUrl != null) {
+                        Picasso.get().load(tutor.getProfileImageUrl()).into(profilePictureImageView);
+                    }
 
 
                 }
@@ -219,34 +235,14 @@ public class TutorProfileActivity extends AppCompatActivity {
     {
         Log.i("TEST", "on activity result");
         if (requestCode == PICK_IMAGE) {
-            Log.i("TEST", "Pick done");
-            final Bundle extras = data.getExtras();
-            if (extras != null) {
-                Log.i("TEST", "Image available");
-                //Get image
-                Bitmap b = extras.getParcelable("data");
-                ByteArrayOutputStream baos = new ByteArrayOutputStream();
-                try {
-                    String path = Environment.getExternalStorageDirectory().getAbsolutePath() + "/" + Environment.DIRECTORY_DCIM + "/image.jpg";
-                    File file = new File(path);
-                    OutputStream os = new BufferedOutputStream(new FileOutputStream(file));
-                    b.compress(Bitmap.CompressFormat.JPEG, 100, os);
-                    os.close();
-
-                    //b.compress(Bitmap.CompressFormat.JPEG, 100, new FileOutputStream(path));
-                    //String path = MediaStore.Images.Media.insertImage(getContentResolver(), b, "Image Description", null);
-                    Uri uri = Uri.parse("file:///" + path);
-                    Log.i("TEST", uri.toString() + " size: " + file.length());
-                } catch (FileNotFoundException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-
-                byte[] imgdata = baos.toByteArray();
+            try {
+                Uri fileUri = data.getData();
+                Log.i("TEST", "FileURI: " + fileUri);
+                InputStream iStream = getContentResolver().openInputStream(fileUri);
+                byte[] imgdata = getBytes(iStream);
 
                 //mImageView.setImageBitmap(imageBitmap);
-                Log.i("TEST", "Successfully took the image! " + b.getByteCount());
+                Log.i("TEST", "Successfully get the image! " + imgdata.length);
 
                 // upload the image to Firebase Storage
                 FirebaseStorage storage = FirebaseStorage.getInstance("gs://stst-1d5a6.appspot.com/");
@@ -257,7 +253,7 @@ public class TutorProfileActivity extends AppCompatActivity {
                 final StorageReference imageRef = storageRef.child(
                         "profile-photos/" + System.currentTimeMillis() + ".jpg");
 
-                UploadTask uploadTask = imageRef.putBytes(imgdata );
+                UploadTask uploadTask = imageRef.putBytes(imgdata);
                 uploadTask.addOnFailureListener(new OnFailureListener() {
                     @Override
                     public void onFailure(@NonNull Exception exception) {
@@ -281,8 +277,22 @@ public class TutorProfileActivity extends AppCompatActivity {
                         });
                     }
                 });
+            } catch (Exception e) {
+                Log.e("TEST", "Failed to catpture the image", e);
             }
         }
+    }
+
+    public byte[] getBytes(InputStream inputStream) throws IOException {
+        ByteArrayOutputStream byteBuffer = new ByteArrayOutputStream();
+        int bufferSize = 1024;
+        byte[] buffer = new byte[bufferSize];
+
+        int len = 0;
+        while ((len = inputStream.read(buffer)) != -1) {
+            byteBuffer.write(buffer, 0, len);
+        }
+        return byteBuffer.toByteArray();
     }
 
 }
