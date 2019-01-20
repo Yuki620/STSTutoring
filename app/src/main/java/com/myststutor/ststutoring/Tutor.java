@@ -15,6 +15,36 @@ public class Tutor {
     private String email;
     private String uid;
 
+    public double getLon() {
+        return lon;
+    }
+
+    public void setLon(double lon) {
+        this.lon = lon;
+    }
+
+    private double lat;
+    private double lon;
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getProfileImageUrl() {
+        return profileImageUrl;
+    }
+
+    public void setProfileImageUrl(String profileImageUrl) {
+        this.profileImageUrl = profileImageUrl;
+    }
+
+    private String address;
+    private String profileImageUrl;
+
     public String getName() {
         return name;
     }

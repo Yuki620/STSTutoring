@@ -47,7 +47,7 @@ public class TutorProfileActivity extends AppCompatActivity {
         nameEditText = findViewById(R.id.editName);
         schoolEditText = findViewById(R.id.editSchool);
         gradeEditText = findViewById(R.id.editGrade);
-        ageEditText = findViewById(R.id.editTarget);
+        ageEditText = findViewById(R.id.editAddress);
         availabilityEditText = findViewById(R.id.editAvailability);
         locationEditText = findViewById(R.id.editLocation);
         introEditText = findViewById(R.id.editIntro);
