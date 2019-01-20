@@ -36,6 +36,7 @@ public class TutorProfileActivity extends AppCompatActivity {
     RangeSeekBar<Integer> tutorProfileTarget;
     TextView profileMinAge;
     TextView profileMaxAge;
+    TextView addressEditText;
 
 
 
@@ -47,7 +48,6 @@ public class TutorProfileActivity extends AppCompatActivity {
         nameEditText = findViewById(R.id.editName);
         schoolEditText = findViewById(R.id.editSchool);
         gradeEditText = findViewById(R.id.editGrade);
-        ageEditText = findViewById(R.id.editAddress);
         availabilityEditText = findViewById(R.id.editAvailability);
         locationEditText = findViewById(R.id.editLocation);
         introEditText = findViewById(R.id.editIntro);
@@ -58,6 +58,7 @@ public class TutorProfileActivity extends AppCompatActivity {
         tutorProfileTarget = findViewById(R.id.tutorProfileTarget);
         profileMinAge = findViewById(R.id.profileMinAge);
         profileMaxAge = findViewById(R.id.profileMaxAge);
+        addressEditText = findViewById(R.id.editAddress);
 
         loadUser();
 
@@ -102,6 +103,11 @@ public class TutorProfileActivity extends AppCompatActivity {
                 t.setEmail(UserManager.user.getEmail());
                 t.setUid(UserManager.user.getUid());
                 t.setPrice(seekBarPrice.getProgress());
+                t.setAddress(addressEditText.getText().toString());
+
+                double[] loc = GeoHelper.getLocationFromAddress(TutorProfileActivity.this, addressEditText.getText().toString());
+                t.setLon(loc[0]);
+                t.setLat(loc[1]);
 
                 // Write a message to the database
                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();

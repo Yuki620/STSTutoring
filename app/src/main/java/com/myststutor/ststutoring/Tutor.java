@@ -23,6 +23,14 @@ public class Tutor {
         this.lon = lon;
     }
 
+    public double getLat() {
+        return lat;
+    }
+
+    public void setLat(double lat) {
+        this.lat = lat;
+    }
+
     private double lat;
     private double lon;
 
