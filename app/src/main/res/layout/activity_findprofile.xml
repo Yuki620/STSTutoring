@@ -114,6 +114,34 @@
                 android:inputType="text"
                 android:textAlignment="viewStart"
                 android:textAllCaps="false" />
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Leave a Review"
+                android:textSize="18sp"
+                android:gravity="center"/>
+            <ListView
+                android:id="@+id/reviewListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                ></ListView>
+            <RatingBar
+                android:id="@+id/reviewRatingBar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:layout_gravity="center"/>
+            <EditText
+                android:id="@+id/reviewEditText"
+                android:lines="5"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <Button
+                android:id="@+id/submitReviewButton"
+                android:text="Submit Review"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
 
 
         </LinearLayout>

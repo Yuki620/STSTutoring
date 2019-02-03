@@ -15,6 +15,7 @@ public class Tutor {
     private String email;
     private String uid;
 
+
     public float getDistance() {
         return distance;
     }
