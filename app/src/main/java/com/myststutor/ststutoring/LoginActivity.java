@@ -82,6 +82,10 @@ public class LoginActivity extends AppCompatActivity {
                                         FirebaseUser user = mAuth.getCurrentUser();
                                         Toast.makeText(LoginActivity.this, "Authentication successful.",
                                                 Toast.LENGTH_SHORT).show();
+
+                                        Paper.book().write("username", emailEditText.getText().toString());
+                                        Paper.book().write("password", passwordEditText.getText().toString());
+
                                         UserManager.user = user;
                                         startActivity(new Intent(LoginActivity.this, TutorProfileActivity.class));
 
@@ -90,6 +94,8 @@ public class LoginActivity extends AppCompatActivity {
                                         Log.w("Test", "createUserWithEmail:failure", task.getException());
                                         Toast.makeText(LoginActivity.this, "Authentication failed.",
                                                 Toast.LENGTH_SHORT).show();
+
+
 
                                     }
                                 }
@@ -126,7 +132,7 @@ public class LoginActivity extends AppCompatActivity {
                             Paper.book().write("password", password);
 
                             UserManager.user = user;
-                            startActivity(new Intent(LoginActivity.this, TutorProfileActivity.class));
+                            startActivity(new Intent(LoginActivity.this, FindActivity.class));
 
                         } else {
                             // If sign in fails, display a message to the user.

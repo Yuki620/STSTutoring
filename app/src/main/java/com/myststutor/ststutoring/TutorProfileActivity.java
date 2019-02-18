@@ -95,16 +95,7 @@ public class TutorProfileActivity extends AppCompatActivity {
         profileMaxAge = findViewById(R.id.profileMaxAge);
         addressEditText = findViewById(R.id.editAddress);
 
-        profilePictureImageView = findViewById(R.id.profilePicImageView);
-        profilePictureImageView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("image/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent, "Select Picture"), PICK_IMAGE);
-            }
-        });
+
         Dexter.withActivity(this)
                 .withPermissions(
                         Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -210,7 +201,8 @@ public class TutorProfileActivity extends AppCompatActivity {
                     contactEditText.setText(tutor.getContact());
                     seekBarPrice.setProgress((int)(tutor.getPrice()));
                     profileCurPrice.setText("$"+ tutor.getPrice());
-                    if (currentProfileImageUrl != null) {
+                    if (tutor.getProfileImageUrl() != null) {
+                        currentProfileImageUrl = tutor.getProfileImageUrl();
                         Picasso.get().load(tutor.getProfileImageUrl()).into(profilePictureImageView);
                     }
 

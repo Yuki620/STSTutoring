@@ -14,9 +14,12 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -39,6 +42,8 @@ import com.karumi.dexter.listener.single.PermissionListener;
 import java.util.ArrayList;
 import java.util.List;
 
+import io.paperdb.Paper;
+
 public class FindActivity extends AppCompatActivity {
 
     ListView tutorListView;
@@ -54,6 +59,10 @@ public class FindActivity extends AppCompatActivity {
     SeekBar seekBarPrice;
     SeekBar seekBarAge;
     SeekBar seekBarDistance;
+
+    LinearLayout tutorLinearyLayout;
+    Button editProfileButton;
+    Button signoutButton;
 
     double latitutde;
     double longitude;
@@ -113,12 +122,45 @@ public class FindActivity extends AppCompatActivity {
         tutorListView = findViewById(R.id.tutorListView);
         loadTutor();
 
+        signoutButton = findViewById(R.id.signoutButton);
+        tutorLinearyLayout = findViewById(R.id.tutorOnlyContainer);
+        editProfileButton = findViewById(R.id.editProfileButton);
+
+
+
+        String username = Paper.book().read("username", null);
+        String password = Paper.book().read("password", null);
+        if (username != null && password != null) {
+            tutorLinearyLayout.setVisibility(View.VISIBLE);
+            editProfileButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(FindActivity.this, TutorProfileActivity.class);
+                    startActivity(intent);
+                }
+            });
+            signoutButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Paper.book().delete("username");
+                    Paper.book().delete("password");
+                    Intent intent = new Intent(FindActivity.this, MenuActivity.class);
+                    startActivity(intent);
+
+                }
+            });
+        } else {
+            tutorLinearyLayout.setVisibility(View.GONE);
+        }
+
+
         textViewCurPrice = findViewById(R.id.textViewCurPrice);
         textViewCurAge = findViewById(R.id.textViewCurAge);
         textViewCurDistance = findViewById(R.id.textVIewCurDistance);
         seekBarPrice = findViewById(R.id.seekBarPrice);
         seekBarAge = findViewById(R.id.seekBarAge);
         seekBarDistance = findViewById(R.id.seekBarDistance);
+
         seekBarDistance.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int i, boolean fromUser) {
