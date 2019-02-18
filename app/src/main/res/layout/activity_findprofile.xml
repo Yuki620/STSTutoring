@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:orientation="vertical"
+    android:background="@color/graylight">
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
@@ -10,7 +12,8 @@
         <LinearLayout
             android:orientation="vertical"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            >
 
 
 
@@ -19,128 +22,176 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="128dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="128dp"
                 android:adjustViewBounds="true"
                 android:src="@drawable/avatar_icon"></ImageView>
 
             <TextView
                 android:id="@+id/nameFindTextView"
-                android:layout_width="368dp"
-                android:layout_height="46dp"
-                android:layout_marginStart="16dp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:ems="10"
+                android:fontFamily="@font/raleway"
                 android:hint="Name"
                 android:inputType="textPersonName"
-                android:textAlignment="viewStart" />
+                android:paddingBottom="10dp"
+                android:textAlignment="center"
+                android:textColor="@color/black"
+                android:textSize="24sp"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/schoolFindTextView"
-                android:layout_width="368dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:ems="10"
+                android:fontFamily="@font/raleway"
                 android:hint="School"
                 android:inputType="text"
-                android:textAlignment="viewStart" />
+                android:paddingBottom="5dp"
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/gradeFindTextView"
-                android:layout_width="368dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:ems="10"
+                android:fontFamily="@font/raleway"
                 android:hint="Grade"
                 android:inputType="number"
-                android:textAlignment="viewStart" />
+                android:paddingBottom="5dp"
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
+
             <TextView
                 android:id="@+id/findProfilePrice"
-                android:layout_width="368dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:ems="10"
+                android:fontFamily="@font/raleway"
                 android:hint="Price"
                 android:inputType="number"
-                android:textAlignment="viewStart" />/>
+                android:paddingBottom="5dp"
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />/>
 
             <TextView
                 android:id="@+id/targetFindTextView"
-                android:layout_width="368dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:ems="10"
+                android:fontFamily="@font/raleway"
                 android:hint="Target Age Range"
                 android:inputType="text|number"
-                android:textAlignment="viewStart" />
+                android:paddingBottom="5dp"
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/availabilityFindTextView"
-                android:layout_width="368dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:ems="10"
+                android:fontFamily="@font/raleway"
                 android:hint="General Availablility"
                 android:inputType="text|textShortMessage|time"
-                android:textAlignment="viewStart" />
+                android:paddingBottom="5dp"
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/locationFindTextView"
-                android:layout_width="368dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:ems="10"
+                android:fontFamily="@font/raleway"
                 android:hint="Preferred Tutoring Location"
                 android:inputType="text|textShortMessage"
-                android:textAlignment="viewStart" />
+                android:paddingBottom="5dp"
+                android:textAlignment="viewStart"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/introFindTextView"
-                android:layout_width="368dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="1dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:ems="10"
+                android:fontFamily="@font/raleway"
                 android:hint="Introduction"
-                android:inputType="text|textLongMessage" />
+                android:inputType="text|textLongMessage"
+                android:paddingBottom="5dp"
+                android:textSize="18sp" />
 
             <TextView
                 android:id="@+id/contactFindTextView"
-                android:layout_width="368dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginBottom="47dp"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"
                 android:ems="10"
+                android:fontFamily="@font/raleway"
                 android:hint="Contact Information"
                 android:inputType="text"
+                android:paddingBottom="15dp"
                 android:textAlignment="viewStart"
-                android:textAllCaps="false" />
+                android:textAllCaps="false"
+                android:textSize="18sp" />
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Leave a Review"
-                android:textSize="18sp"
+                android:paddingBottom="5dp"
+                android:textSize="24sp"
                 android:gravity="center"/>
-            <ListView
-                android:id="@+id/reviewListView"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                ></ListView>
+
             <RatingBar
                 android:id="@+id/reviewRatingBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:numStars="5"
-                android:layout_gravity="center"/>
+                android:layout_gravity="center" />
             <EditText
                 android:id="@+id/reviewEditText"
-                android:lines="5"
+                android:lines="3"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="25dp"
+                android:layout_marginRight="25dp"/>
             <Button
                 android:id="@+id/submitReviewButton"
                 android:text="Submit Review"
+                style="@style/FirebaseUI.Button.AccountChooser.FacebookButton"
+                android:textAlignment="center"
+                android:textSize="24sp"
+                android:layout_margin="25dp"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="wrap_content"
+                android:background="@drawable/rounded"/>
+            <ListView
+                android:id="@+id/reviewListView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="25dp"
+                ></ListView>
 
 
 

@@ -23,6 +23,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import io.paperdb.Paper;
+
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth;
@@ -49,33 +51,20 @@ public class LoginActivity extends AppCompatActivity {
         final EditText emailEditText = findViewById(R.id.emaileditText);
         final EditText passwordEditText = findViewById(R.id.passwordeditText);
 
+        String username = Paper.book().read("username", null);
+        String password = Paper.book().read("password", null);
+
+        if (username != null && password != null) {
+            loginWithUsernamePassword(username, password);
+        }
+
         final Button buttonLogin = findViewById(R.id.buttonLogin);
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick (View view) {
-                mAuth.signInWithEmailAndPassword(emailEditText.getText().toString(), passwordEditText.getText().toString())
-                        .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d("Test", "signInWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    Toast.makeText(LoginActivity.this, "Login successful.",
-                                            Toast.LENGTH_SHORT).show();
-                                    UserManager.user = user;
-                                    startActivity(new Intent(LoginActivity.this, TutorProfileActivity.class));
+                loginWithUsernamePassword(emailEditText.getText().toString(), passwordEditText.getText().toString());
 
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w("Test", "signInWithEmail:failure", task.getException());
-                                    Toast.makeText(LoginActivity.this, "Login failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
 
-                                // ...
-                            }
-                        });
             }
         });
         final Button buttonSignup = findViewById(R.id.buttonSignup);
@@ -119,6 +108,36 @@ public class LoginActivity extends AppCompatActivity {
                 .build();
         // Build a GoogleSignInClient with the options specified by gso.
         mGoogleSignInClient = GoogleSignIn.getClient(LoginActivity.this, gso);
+    }
+
+    private void loginWithUsernamePassword (final String username, final String password) {
+        mAuth.signInWithEmailAndPassword(username, password)
+                .addOnCompleteListener(LoginActivity.this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if (task.isSuccessful()) {
+                            // Sign in success, update UI with the signed-in user's information
+                            Log.d("Test", "signInWithEmail:success");
+                            FirebaseUser user = mAuth.getCurrentUser();
+                            Toast.makeText(LoginActivity.this, "Login successful.",
+                                    Toast.LENGTH_SHORT).show();
+
+                            Paper.book().write("username", username);
+                            Paper.book().write("password", password);
+
+                            UserManager.user = user;
+                            startActivity(new Intent(LoginActivity.this, TutorProfileActivity.class));
+
+                        } else {
+                            // If sign in fails, display a message to the user.
+                            Log.w("Test", "signInWithEmail:failure", task.getException());
+                            Toast.makeText(LoginActivity.this, "Login failed.",
+                                    Toast.LENGTH_SHORT).show();
+                        }
+
+                        // ...
+                    }
+                });
     }
 
 }

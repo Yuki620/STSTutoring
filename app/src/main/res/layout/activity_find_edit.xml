@@ -4,6 +4,19 @@
     android:orientation="vertical"
     android:layout_height="match_parent"
     android:layout_margin="25dp">
+    <Button
+        android:id="@+id/buttonEditProfile"
+        style="@style/FirebaseUI.Button.AccountChooser.FacebookButton"
+        android:layout_width="250dp"
+        android:layout_height="50dp"
+        android:layout_gravity="center_horizontal"
+        android:padding="10dp"
+        android:background="@drawable/rounded"
+        android:baselineAligned="false"
+        android:text="Edit Profile"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:textAlignment="center"/>
 
 
     <LinearLayout
@@ -11,6 +24,7 @@
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         >
+
 
         <Spinner
             android:id="@+id/subjectSpinner"

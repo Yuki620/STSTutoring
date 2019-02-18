@@ -40,7 +40,7 @@ public class ReviewListAdapter extends ArrayAdapter<Review> {
         TextView reviewDateItemTextView = view.findViewById(R.id.reviewDateItemTextView);
         Calendar cal = Calendar.getInstance(Locale.ENGLISH);
         cal.setTimeInMillis(r.getTimestamp());
-        String dataStr = DateFormat.format("dd-MM-yyyy hh:mm", cal).toString();
+        String dataStr = DateFormat.format("MM-dd-yyyy hh:mm", cal).toString();
         reviewDateItemTextView.setText(dataStr);
         TextView reviewCommentItemTextView = view.findViewById(R.id.reviewCommentItemTextView);
         reviewCommentItemTextView.setText(r.getComment());
