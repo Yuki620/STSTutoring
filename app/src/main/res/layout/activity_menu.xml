@@ -4,15 +4,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
-    <TextView
-        android:layout_width="202dp"
-        android:layout_height="59dp"
-        android:fontFamily="serif"
-        android:text="STS Tutoring"
-        android:textAlignment="center"
-        android:textSize="32sp"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="150dp"/>
+
+    <ImageView
+        android:id="@+id/profilePicImageView"
+        android:layout_width="287dp"
+        android:layout_height="357dp"
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:src="@drawable/peers_name_logo"></ImageView>
 
     <Button
         android:id="@+id/buttonFindTutor"
@@ -20,7 +19,7 @@
         android:layout_width="250dp"
         android:layout_height="50dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginTop="100dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/rounded"
         android:baselineAligned="false"
         android:text="Find A Tutor"

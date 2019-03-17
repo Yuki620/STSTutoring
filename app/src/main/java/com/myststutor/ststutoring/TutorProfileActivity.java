@@ -157,6 +157,7 @@ public class TutorProfileActivity extends AppCompatActivity {
                 t.setName(nameEditText.getText().toString());
                 t.setSchool(schoolEditText.getText().toString());
                 t.setGrade(Integer.parseInt(gradeEditText.getText().toString()));
+                Log.i("Test", profileMinAge.getText().toString());
                 t.setAgeRangeMin(Integer.parseInt(profileMinAge.getText().toString()));
                 t.setAgeRangeMax(Integer.parseInt(profileMaxAge.getText().toString()));
                 t.setAvailability(availabilityEditText.getText().toString());

@@ -98,7 +98,7 @@
                     android:layout_height="wrap_content"
                     android:layout_alignParentLeft="true"
                     android:layout_marginEnd="0dp"
-                    android:text="0" />
+                    android:text="0 yrs" />
                 <TextView
                     android:id="@+id/textViewCurAge"
                     android:layout_centerInParent="true"
@@ -110,7 +110,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:text="100" />
+                    android:text="100 yrs" />
             </RelativeLayout>
             <SeekBar
                 android:id="@+id/seekBarAge"

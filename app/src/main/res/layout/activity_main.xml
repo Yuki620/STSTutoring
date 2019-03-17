@@ -10,7 +10,7 @@
         android:layout_width="202dp"
         android:layout_height="59dp"
         android:fontFamily="serif"
-        android:text="STS Tutoring"
+        android:text="PEERS"
         android:textAlignment="center"
         android:textSize="32sp"
         app:layout_constraintBottom_toBottomOf="parent"
